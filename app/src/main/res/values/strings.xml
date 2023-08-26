@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Webtoon</string>
+    <string name="backToRecentlyViewPage">어디까지 봤더라..?</string>
+    <string name="changeTabName">탭 이름 바꾸기</string>
+</resources>
