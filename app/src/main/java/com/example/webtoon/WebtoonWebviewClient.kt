@@ -10,16 +10,24 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
 
-class WebtoonWebviewClient(private val progressCircular:ProgressBar):WebViewClient() {
+class WebtoonWebviewClient(
+    private val progressCircular:ProgressBar,
+    private val saveData: (String) -> Unit
+):WebViewClient() {
 
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
 
+        if (request != null && request.url.toString().contains("webtoon/detail")) {
+            saveData(request.url.toString())
+        }
         // return true = 로드 멈춤
         // return false = 계속 url 로드 시도
         return if(!(request != null && request.url.toString().contains("comic.naver.com"))) {
+
             if (view != null) {
-                Toast.makeText(view.context,"웹툰 바깥으로 나가지마세요!!!", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    view.context,"웹툰 바깥으로 나가지마세요!!!", Toast.LENGTH_LONG).show()
             }
             true
         } else {
